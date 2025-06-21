@@ -1,93 +1,103 @@
-/* ✅ Mobile Responsive Fixes Only */
-@media (max-width: 768px) {
-  /* Main content card (listing show page) */
-  .show-card.col-6.offset-3 {
-    width: 95% !important;
-    margin: 0 auto !important;
-    padding: 0 1rem;
-  }
-
-  /* Title/headings centered */
-  .col-8.offset-2,
-  .col-8.offset-3 {
-    width: 100% !important;
-    margin: 0 auto;
-    text-align: center;
-    padding: 0 1rem;
-  }
-
-  /* Edit/Delete buttons stacked vertically */
-  .btns {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    margin-top: 1rem;
-  }
-
-  .btns .btn {
-    width: 90%;
-    font-size: 1rem;
-  }
-
-  /* Edit/Delete buttons inside show/edit pages */
-  .btn.btn-danger,
-  .btn.btn-primary {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  /* Responsive review card */
-  .card.col-5.ms-3.mb-3 {
-    width: 90% !important;
-    margin: 1rem auto !important;
-  }
-
-  /* Review form */
-  form.needs-validation {
-    width: 95%;
-    margin: 0 auto;
-  }
-
-  textarea,
-  .form-control {
-    width: 100% !important;
-    resize: vertical;
-    box-sizing: border-box;
-  }
-
-  /* Submit button full width */
-  button[type="submit"] {
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  /* Review card delete button */
-  .card .btn.btn-danger {
-    width: 100%;
-  }
-
-  /* Footer: stacked and centered */
-  .f-info {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    height: auto;
-  }
-
-  .f-info-links,
-  .f-info-socials,
-  .f-info-brand {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .f-info a {
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
+body{
+   background-color: rgb(195, 171, 218);
+   font-family: "Plus Jakarta Sans", sans-serif;
+   display:flex;
+   flex-direction: column;
+   min-height:100vh;
 }
+.container{
+   flex:1;
+}
+.navbar{
+height:5rem;
+}
+.fa-compass {
+color:#ec6473;
+   font-size: 2rem;
+
+}
+.nav-link{
+   color:#080808;
+}
+ /*footer */
+.f-info-links a{
+   text-decoration: none;
+   color:black;
+}
+.f-info-links a:hover{
+   text-decoration: underline;
+   
+}
+.f-info-links,
+.f-info-socials ,.f-info-brand {
+   width:100%;
+   display:flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.f-info-socials i { 
+font-size:1.2rem;
+margin-right: 1rem;
+ }
+
+
+.f-info {
+   text-align:center;
+height: 8rem;
+background-color: #ceccccf1;
+display:flex;
+flex-wrap:wrap;
+justify-content: center;
+align-items: space-evenly;
+
+}
+/*cards*/
+.listing-card{
+   border:none !important;
+   margin-bottom:2 rem;
+}
+.card-img-top{
+   border-radius:1rem !important;
+   width:100% !important;
+   object-fit:cover !important;
+}
+.card-body{
+   padding:0 !important;
+}
+.card-text p{
+   font-weight: 400;
+}
+.listing-link{
+   text-decoration: none;
+}
+/*card effect*/
+.card-img-overlay{
+   opacity:0;
+}
+.card-img-overlay:hover{
+   opacity:0.2 !important;
+   background-color: aliceblue !important;
+}
+/*new page*/
+.btn.btn-dark{
+   background-color:  #fe424d;
+   border:none;
+}
+/*edit page*/
+.btn.btn-primary{
+   background-color:  #fe424d !important;
+   border:none;
+}
+.btns{
+   display:flex;
+}
+.btn.btn-dark{
+   background-color: #fe424d !important;
+
+}
+.show-card{
+   padding-left:0;
+   padding-right: 0;
+}
+
