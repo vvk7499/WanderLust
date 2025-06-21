@@ -42,6 +42,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .f-info-socials i {
@@ -51,12 +52,12 @@ body {
 
 .f-info {
   text-align: center;
-  height: 8rem;
+  height: auto;
   background-color: #ceccccf1;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
 }
 
 /* Cards */
@@ -121,30 +122,32 @@ body {
   padding-right: 0;
 }
 
-/* Fix review card wrapping */
+/* Responsive Fixes */
 @media (max-width: 768px) {
   .card.col-5 {
-    flex: 0 0 90%;
-    margin-left: auto;
-    margin-right: auto;
+    flex: 0 0 90% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   .btns {
     flex-direction: column;
     align-items: center;
+    gap: 0.5rem;
   }
 
   .col-6.offset-3.show-card {
     width: 95% !important;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
-  .col-8.offset-2, .col-8.offset-3 {
-    width: 100%;
-    text-align: center;
-    margin-left: 0;
-    padding: 0 1rem;
+  .col-8.offset-2,
+  .col-8.offset-3 {
+    width: 100% !important;
+    text-align: center !important;
+    margin-left: 0 !important;
+    padding: 0 1rem !important;
   }
 
   .navbar-nav {
@@ -153,11 +156,34 @@ body {
 
   .btn.btn-dark.col-1.offset-3,
   .btn.btn-dark.offset-1 {
-    width: 100%;
-    margin: 0.5rem 0;
+    width: 90% !important;
+    margin: 0.5rem auto !important;
+  }
+
+  textarea.form-control,
+  .form-control {
+    width: 100% !important;
+  }
+
+  form.needs-validation {
+    padding: 0 1rem !important;
+  }
+
+  .card-body {
+    text-align: center;
+  }
+
+  .btn.btn-sm.btn-dark {
+    display: block;
+    margin: 0 auto;
   }
 
   .row {
     flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  h3, h4, h5, p {
+    text-align: center;
   }
 }
