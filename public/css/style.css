@@ -1,39 +1,44 @@
 /* ✅ Responsive Fixes Only (no background color changes) */
 @media (max-width: 768px) {
 
-  /* Fix listing card container */
+  /* Main content area shrink for mobile */
   .show-card.col-6.offset-3 {
     width: 95% !important;
-    margin: 0 auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
     padding: 0 1rem;
   }
 
-  /* Center title text */
-  .col-8.offset-2, .col-8.offset-3 {
+  /* Title or heading text centers on mobile */
+  .col-8.offset-2,
+  .col-8.offset-3 {
     width: 100% !important;
     margin: 0 auto;
     text-align: center;
     padding: 0 1rem;
   }
 
-  /* Stack buttons vertically */
+  /* Stack buttons vertically in mobile view */
   .btns {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    margin-top: 1rem;
   }
 
   .btns .btn {
-    width: 80%;
+    width: 90%;
+    font-size: 1rem;
   }
 
-  /* Review cards - one per row */
+  /* Review cards - one per row and centered */
   .card.col-5.ms-3.mb-3 {
     width: 90% !important;
     margin: 1rem auto !important;
   }
 
-  /* Review form - full width textarea and inputs */
+  /* Review form full width fix */
   form.needs-validation {
     width: 95%;
     margin: 0 auto;
@@ -42,11 +47,25 @@
   textarea,
   .form-control {
     width: 100% !important;
+    resize: vertical;
   }
 
-  /* Buttons under review form */
+  /* Submit button under review */
   button[type="submit"] {
     width: 100%;
     margin-top: 1rem;
+  }
+
+  /* Socials / Footer center alignment */
+  .f-info-links,
+  .f-info-socials,
+  .f-info-brand {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .f-info {
+    padding: 1rem;
+    height: auto;
   }
 }
