@@ -1,15 +1,13 @@
-/* ✅ Responsive Fixes Only (no background color changes) */
+/* ✅ Mobile Responsive Fixes Only */
 @media (max-width: 768px) {
-
-  /* Main content area shrink for mobile */
+  /* Main content card (listing show page) */
   .show-card.col-6.offset-3 {
     width: 95% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin: 0 auto !important;
     padding: 0 1rem;
   }
 
-  /* Title or heading text centers on mobile */
+  /* Title/headings centered */
   .col-8.offset-2,
   .col-8.offset-3 {
     width: 100% !important;
@@ -18,7 +16,7 @@
     padding: 0 1rem;
   }
 
-  /* Stack buttons vertically in mobile view */
+  /* Edit/Delete buttons stacked vertically */
   .btns {
     display: flex;
     flex-direction: column;
@@ -32,13 +30,20 @@
     font-size: 1rem;
   }
 
-  /* Review cards - one per row and centered */
+  /* Edit/Delete buttons inside show/edit pages */
+  .btn.btn-danger,
+  .btn.btn-primary {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  /* Responsive review card */
   .card.col-5.ms-3.mb-3 {
     width: 90% !important;
     margin: 1rem auto !important;
   }
 
-  /* Review form full width fix */
+  /* Review form */
   form.needs-validation {
     width: 95%;
     margin: 0 auto;
@@ -48,24 +53,41 @@
   .form-control {
     width: 100% !important;
     resize: vertical;
+    box-sizing: border-box;
   }
 
-  /* Submit button under review */
+  /* Submit button full width */
   button[type="submit"] {
     width: 100%;
     margin-top: 1rem;
   }
 
-  /* Socials / Footer center alignment */
+  /* Review card delete button */
+  .card .btn.btn-danger {
+    width: 100%;
+  }
+
+  /* Footer: stacked and centered */
+  .f-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    height: auto;
+  }
+
   .f-info-links,
   .f-info-socials,
   .f-info-brand {
     flex-direction: column;
-    gap: 0.3rem;
+    align-items: center;
+    gap: 0.4rem;
   }
 
-  .f-info {
-    padding: 1rem;
-    height: auto;
+  .f-info a {
+    display: block;
+    width: 100%;
+    text-align: center;
   }
 }
