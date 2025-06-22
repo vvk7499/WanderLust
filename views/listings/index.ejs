@@ -1,16 +1,17 @@
 <% layout("/layouts/boilerplate") %>
 
 <% if (success && success.length > 0) { %>
-  <div class="alert alert-success alert-dismissible fade show col-6 offset-3 mt-3" role="alert" >
+  <div class="alert alert-success alert-dismissible fade show col-6 offset-3 mt-3" role="alert">
     <%= success %>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <% } %>
 
-<!-- ✅ Font Awesome - make sure it's in your layout head or here -->
+<!-- ✅ Font Awesome -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 <style>
+  /* Responsive Filter Bar */
   #filters {
     display: flex;
     flex-wrap: wrap;
@@ -18,16 +19,12 @@
     padding: 20px 0;
     gap: 1.3rem;
     align-items: center;
-    transition: max-height 0.3s ease-in-out;
-    overflow: hidden;
-    margin-top:0.2rem;
   }
 
   .filter {
     text-align: center;
     opacity: 0.7;
     transition: all 0.3s;
-    width: 5rem;
   }
 
   .filter:hover {
@@ -50,31 +47,51 @@
     border-radius: 1rem;
     height: 3rem;
     padding: 1rem;
-    margin-left: 3rem;
+    margin-left: 1rem;
     display: flex;
     align-items: center;
   }
 
-  /* Mobile responsive fix */
+  /* Toggle Button */
+  #filterToggleBtn {
+    display: none;
+    border: none;
+    background: #fe424d;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.5rem;
+    margin: 1rem auto;
+  }
+
+  /* Responsive Filter Row on Mobile */
   @media (max-width: 768px) {
     #filters {
-      flex-wrap: wrap;
-      justify-content: center;
-      max-height: 0;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      justify-content: flex-start;
+      padding: 10px 1rem;
+      gap: 1rem;
+      margin-top: 1rem;
+      display: none;
     }
 
-    #filters.show {
-      max-height: 1000px;
+    .filter,
+    .tax-switch {
+      flex: 0 0 auto;
+    }
+
+    #filterToggleBtn {
+      display: block;
     }
   }
 </style>
 
-<!-- ✅ Toggle Button for Mobile Filters -->
+<!-- ✅ Filter Toggle Button -->
 <div class="text-center">
-  <button id="filterToggleBtn">Apply Filters</button>
+  <button id="filterToggleBtn">Toggle Filters</button>
 </div>
 
-<!-- ✅ Category Navigation Bar -->
+<!-- ✅ Category Filters -->
 <div id="filters">
   <% const categories = [
     { name: 'Trending', icon: 'fa-fire' },
@@ -97,7 +114,7 @@
     </a>
   <% } %>
 
-  <!-- Tax switch toggle (optional) -->
+  <!-- Tax Switch -->
   <div class="tax-switch">
     <div class="form-check-reverse form-switch">
       <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
@@ -128,26 +145,22 @@
   <% } %>
 </div>
 
+<!-- ✅ Scripts -->
 <script>
+  // GST Toggle
   let taxSwitch = document.getElementById("switchCheckDefault");
   taxSwitch.addEventListener("click", () => {
     let taxInfo = document.getElementsByClassName("tax-info");
-    for (info of taxInfo) {
-      if (info.style.display !== "inline") {
-        info.style.display = "inline";
-      } else {
-        info.style.display = "none";
-      }
+    for (let info of taxInfo) {
+      info.style.display = info.style.display === "inline" ? "none" : "inline";
     }
   });
 
+  // Filter Toggle Button Logic
   const filterBtn = document.getElementById("filterToggleBtn");
   const filters = document.getElementById("filters");
+
   filterBtn.addEventListener("click", () => {
-    if (filters.style.display === "none" || filters.style.display === "") {
-      filters.style.display = "flex";
-    } else {
-      filters.style.display = "none";
-    }
+    filters.style.display = filters.style.display === "none" || filters.style.display === "" ? "flex" : "none";
   });
 </script>
