@@ -94,9 +94,9 @@ app.use("/listings", reviewsRouter);
 app.use("/", userRouter);
 
 // // Root route
-app.get("/", (req, res) => {
-  res.send("Welcome to Wanderlust");
-});
+// app.get("/", (req, res) => {
+//   res.send("Welcome to Wanderlust");
+// });
 
 // 404
 app.all("*", (req, res, next) => {
