@@ -1,8 +1,6 @@
-if(
-  process.env.NODE_ENV != "production"){
-    require("dotenv").config();
-
-  }
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
+}
 
 const express = require("express");
 const app = express();
@@ -14,17 +12,18 @@ const ExpressError = require("./utils/ExpressError.js");
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-
 const flash = require("connect-flash");
+
 const passport = require("passport");
 const localStrategy = require("passport-local");
 const User = require("./models/user.js");
 
+// Routes
 const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderLust";
+// MongoDB Atlas URL
 const dbUrl = process.env.ATLASDB_URL;
 console.log("Connected to:", dbUrl);
 
@@ -37,26 +36,28 @@ async function main() {
   await mongoose.connect(dbUrl);
 }
 
-// App Setup
+// Template Engine
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+
+// Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 
-// Session + Flash
+// Session & Flash Setup
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: {
-    secret:process.env.SECRET,
+    secret: process.env.SECRET,
   },
-  touchAfter: 24 + 3600,
+  touchAfter: 24 * 3600, // 24 hours
 });
+
 store.on("error", (err) => {
   console.log("Error in Mongo session store:", err);
 });
-
 
 const sessionOptions = {
   store,
@@ -64,7 +65,7 @@ const sessionOptions = {
   resave: false,
   saveUninitialized: true,
   cookie: {
-    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 1 week
     maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
   },
@@ -73,14 +74,14 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
+// Passport Auth
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
-
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// ✅ Middleware to set flash messages
+// Flash and User Middleware
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
@@ -93,23 +94,24 @@ app.use("/listings", listingsRouter);
 app.use("/listings", reviewsRouter);
 app.use("/", userRouter);
 
-// // Root route
-// app.get("/", (req, res) => {
-//   res.send("Welcome to Wanderlust");
-// });
+// ✅ Root Redirect to Listings Page
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
 
-// 404
+// 404 Handler
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page Not Found!"));
 });
 
-// Error Handler
+// Error Handler Middleware
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
   if (!err.message) err.message = "Something went wrong!";
   res.status(statusCode).render("error.ejs", { err });
 });
 
+// Server Listener
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");
 });
