@@ -94,12 +94,12 @@ app.use("/listings", reviewsRouter);
 app.use("/", userRouter);
 
 // // Root route
-// app.get("/", (req, res) => {
-//   res.send("Hi, I am root");
-// });
+app.get("/", (req, res) => {
+  res.send("Welcome to Wanderlust");
+});
 
 // 404
-app.all("/listings", (req, res, next) => {
+app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page Not Found!"));
 });
 
