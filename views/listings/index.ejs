@@ -1,7 +1,7 @@
 <% layout("/layouts/boilerplate") %>
 
 <% if (success && success.length > 0) { %>
-  <div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert" >
+  <div class="alert alert-success alert-dismissible fade show col-6 offset-3 mt-3" role="alert" >
     <%= success %>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
@@ -14,10 +14,10 @@
   #filters {
     display: flex;
     flex-wrap: wrap;
-        justify-content: center;
+    justify-content: center;
     padding: 20px 0;
     gap: 1.3rem;
-    align-items:center;
+    align-items: center;
   }
 
   .filter {
@@ -36,76 +36,70 @@
     font-size: 1.5rem;
     margin-bottom: 0.3rem;
   }
+
   .tax-info {
-display: none;
+    display: none;
   }
+
   .tax-switch {
-border:1px solid black;
-border-radius: 1rem;
-height:3rem;
-padding: 1rem;
-margin-left:3rem;
-display: flex;
-align-items: center;
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3rem;
+    padding: 1rem;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  #filterToggleBtn {
+    display: none;
+    border: none;
+    background: #fe424d;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin: 0 auto 1rem auto;
+  }
+
+  @media (max-width: 768px) {
+    #filters {
+      flex-direction: column;
+      display: none;
+    }
+
+    #filterToggleBtn {
+      display: block;
+    }
   }
 </style>
 
+<!-- ✅ Toggle Button for Mobile Filters -->
+<div class="text-center">
+  <button id="filterToggleBtn">Toggle Filters</button>
+</div>
+
 <!-- ✅ Category Navigation Bar -->
 <div id="filters">
-  <a class="filter text-decoration-none text-dark" href="/listings?category=Trending">
-    <i class="fa-solid fa-fire"></i>
-    <p>Trending</p>
-  </a>
+  <% const categories = [
+    { name: 'Trending', icon: 'fa-fire' },
+    { name: 'Rooms', icon: 'fa-bed' },
+    { name: 'Iconic Cities', icon: 'fa-city' },
+    { name: 'Mountains', icon: 'fa-mountain' },
+    { name: 'Castles', icon: 'fa-chess-rook' },
+    { name: 'Beach', icon: 'fa-water-ladder' },
+    { name: 'Farm', icon: 'fa-cow' },
+    { name: 'Camping', icon: 'fa-campground' },
+    { name: 'Arctic', icon: 'fa-snowflake' },
+    { name: 'Domes', icon: 'fa-igloo' },
+    { name: 'Boats', icon: 'fa-ship' },
+  ]; %>
 
-  <a class="filter text-decoration-none text-dark" href="/listings?category=Rooms">
-    <i class="fa-solid fa-bed"></i>
-    <p>Rooms</p>
-  </a>
-
-  <a class="filter text-decoration-none text-dark" href="/listings?category=Iconic Cities">
-    <i class="fa-solid fa-city"></i>
-    <p>Iconic Cities</p>
-  </a>
-
-  <a class="filter text-decoration-none text-dark" href="/listings?category=Mountains">
-    <i class="fa-solid fa-mountain"></i>
-    <p>Mountains</p>
-  </a>
-
-  <a class="filter text-decoration-none text-dark" href="/listings?category=Castles">
-    <i class="fa-solid fa-chess-rook"></i>
-    <p>Castles</p>
-  </a>
-
-  <a class="filter text-decoration-none text-dark" href="/listings?category=Beach">
-    <i class="fa-solid fa-water-ladder"></i>
-    <p>Beach</p>
-  </a>
-
-  <a class="filter text-decoration-none text-dark" href="/listings?category=Farm">
-    <i class="fa-solid fa-cow"></i>
-    <p>Farm</p>
-  </a>
-
-  <a class="filter text-decoration-none text-dark" href="/listings?category=Camping">
-    <i class="fa-solid fa-campground"></i>
-    <p>Camping</p>
-  </a>
-
-  <a class="filter text-decoration-none text-dark" href="/listings?category=Arctic">
-    <i class="fa-solid fa-snowflake"></i>
-    <p>Arctic</p>
-  </a>
-
-  <a class="filter text-decoration-none text-dark" href="/listings?category=Domes">
-    <i class="fa-solid fa-igloo"></i>
-    <p>Domes</p>
-  </a>
-
-  <a class="filter text-decoration-none text-dark" href="/listings?category=Boats">
-    <i class="fa-solid fa-ship"></i>
-    <p>Boats</p>
-  </a>
+  <% for (let cat of categories) { %>
+    <a class="filter text-decoration-none text-dark" href="/listings?category=<%= cat.name %>">
+      <i class="fa-solid <%= cat.icon %>"></i>
+      <p><%= cat.name %></p>
+    </a>
+  <% } %>
 
   <!-- Tax switch toggle (optional) -->
   <div class="tax-switch">
@@ -115,7 +109,6 @@ align-items: center;
     </div>
   </div>
 </div>
-
 
 <!-- ✅ Listings Grid -->
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
@@ -131,7 +124,7 @@ align-items: center;
             <% } else { %>
               Price not available
             <% } %>
-            <i class ="tax-info"> &nbsp; &nbsp; +18% GST </i>
+            <i class="tax-info"> &nbsp; &nbsp; +18% GST </i>
           </p>
         </div>
       </div>
@@ -141,14 +134,24 @@ align-items: center;
 
 <script>
   let taxSwitch = document.getElementById("switchCheckDefault");
-taxSwitch.addEventListener("click",()=>{
-  let taxInfo = document.getElementsByClassName("tax-info");
-  for (info of taxInfo){
-  if (info.style.display != "inline"){
-    info.style.display = "inline";
-    }else{
-      info.style.display = "none";
+  taxSwitch.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for (info of taxInfo) {
+      if (info.style.display !== "inline") {
+        info.style.display = "inline";
+      } else {
+        info.style.display = "none";
+      }
     }
-  }
-});
+  });
+
+  const filterBtn = document.getElementById("filterToggleBtn");
+  const filters = document.getElementById("filters");
+  filterBtn.addEventListener("click", () => {
+    if (filters.style.display === "none" || filters.style.display === "") {
+      filters.style.display = "flex";
+    } else {
+      filters.style.display = "none";
+    }
+  });
 </script>
