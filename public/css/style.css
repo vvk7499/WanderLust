@@ -23,7 +23,7 @@ body {
   color: #080808;
 }
 
-/* footer */
+/* Footer */
 .f-info-links a {
   text-decoration: none;
   color: black;
@@ -57,7 +57,7 @@ body {
   align-items: space-evenly;
 }
 
-/* cards */
+/* Cards */
 .listing-card {
   border: none !important;
   margin-bottom: 2rem;
@@ -81,7 +81,7 @@ body {
   text-decoration: none;
 }
 
-/* card hover effect */
+/* Card Hover Effect */
 .card-img-overlay {
   opacity: 0;
 }
@@ -91,50 +91,45 @@ body {
   background-color: aliceblue !important;
 }
 
-/* new page buttons */
+/* New Page Button */
 .btn.btn-dark {
   background-color: #fe424d;
   border: none;
 }
 
-/* edit page buttons */
+/* Edit Page */
 .btn.btn-primary {
   background-color: #fe424d !important;
   border: none;
 }
 
-/* edit & delete btn container */
 .btns {
   display: flex;
-  gap: 1rem;
 }
 
 .btn.btn-dark {
   background-color: #fe424d !important;
 }
 
-/* show card */
 .show-card {
   padding-left: 0;
   padding-right: 0;
 }
 
-/* review star rating fix */
-.starability-result {
+/* Starability rating result inside card */
+.starability-result.card-text {
   display: inline-block;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 1.4rem;
-  line-height: 1.5;
-  margin: 0.5rem 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  white-space: normal;
+  font-size: 1.2rem;
 }
 
-/* optional: improve delete btn on review card */
-.card .btn-sm.btn-dark {
-  background-color: #ff4d4d !important;
-  border: none;
-  padding: 0.3rem 0.8rem;
-  font-size: 0.85rem;
+/* Mobile responsive review cards */
+@media (max-width: 576px) {
+  .card.col-6 {
+    flex: 0 0 100%;
+    max-width: 90%;
+    margin: 0.5rem auto;
+  }
 }
